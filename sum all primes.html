@@ -1,0 +1,19 @@
+function sumPrimes(num) {
+  let sum = 0;
+  for (let j = 1; j <= num; j++) {
+    if (isPrime(j)) {
+      sum += j;
+    }
+  }
+  return sum;
+}
+
+function isPrime(n) {
+  if (n <= 1) return false;
+  for (let i = 2; i <= (n/2); i++) {
+    if (n % i === 0) {
+      return false;
+    }
+  }
+  return true;
+}
