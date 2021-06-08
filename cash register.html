@@ -1,0 +1,68 @@
+Cash Register
+Design a cash register drawer function checkCashRegister() that accepts purchase price as the first argument (price), payment as the second argument (cash), and cash-in-drawer (cid) as the third argument.
+
+cid is a 2D array listing available currency.
+
+The checkCashRegister() function should always return an object with a status key and a change key.
+
+Return {status: "INSUFFICIENT_FUNDS", change: []} if cash-in-drawer is less than the change due, or if you cannot return the exact change.
+
+Return {status: "CLOSED", change: [...]} with cash-in-drawer as the value for the key change if it is equal to the change due.
+
+Otherwise, return {status: "OPEN", change: [...]}, with the change due in coins and bills, sorted in highest to lowest order, as the value of the change key.
+
+
+solution:
+
+function checkCashRegister(price, cash, cid) {
+  var cidCopy = cid.slice(0);
+  cidCopy.reverse();
+
+  const value = {
+    "PENNY": 0.01,
+    "NICKEL": 0.05,
+    "DIME": 0.10,
+    "QUARTER": 0.25,
+    "ONE": 1.00,
+    "FIVE": 5.00,
+    "TEN": 10.00,
+    "TWENTY": 20.00,
+    "ONE HUNDRED": 100.00
+  };
+
+  var rawChange = cash - price;
+  var remaining = rawChange;
+
+  var changeObj = {
+    status: '',
+    change: []
+  };
+
+  var j = 0;
+
+  cidCopy.forEach(x => {
+    if(value[x[0]] < rawChange && remaining > 0 && remaining > value[x[0]]) {
+      changeObj.change.push([x[0], 0])
+      changeObj.status = "OPEN";
+      while (remaining - value[x[0]] >= 0 && x[1] - value[x[0]] >= 0) {
+        x[1] = (x[1] - value[x[0]]).toFixed(2);
+        remaining = (remaining - value[x[0]]).toFixed(2);
+        changeObj.change[j][1] += value[x[0]];
+      }
+      j += 1;
+    }
+  });
+
+  if (remaining > 0.01) {
+    changeObj.status = 'INSUFFICIENT_FUNDS';
+    changeObj.change = [];
+  } else if (cidCopy.every(x => {return x[1] < .01;})) {
+    changeObj.status = 'CLOSED';
+    changeObj.change = cid;
+  } 
+
+  console.log(changeObj);
+  return changeObj;
+}
+
+checkCashRegister(19.5, 20, [["PENNY", 0.5], ["NICKEL", 0], ["DIME", 0], ["QUARTER", 0], ["ONE", 0], ["FIVE", 0], ["TEN", 0], ["TWENTY", 0], ["ONE HUNDRED", 0]]);
