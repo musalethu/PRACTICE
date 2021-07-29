@@ -1,0 +1,21 @@
+FORMAT CHECK
+A format check is used to ensure that data entered matches a desired pattern. e.g. if a user is required to enter an email address then it should follow a set pattern of "XXXXX" + @ + "XXXXX" + "." + "XXX"  This would allow an email address such as "example@gmail.com" to be accepted.
+
+Another example of a format check would be to check that an ID number has been entered in the correct format.  Lets imaginge that in our program an ID number must begin with the organisations initials ISS and must end with 4 numbers e.g ISS1432.
+
+Pseudo code for a validation check like this may look like:
+
+OUTPUT "Please enter an ID number e.g. ISS1111"
+Accepted = False
+While Accepted = False Do:
+​     IDNo = INPUT()
+     First = IDNo[0,1,2]
+     Last = IDNo[3,4,5,6]
+     Length = Len(IDNo)
+     IF Length =7 THEN AND First = "ISS" AND (Last >=0000 AND Last <=9999):
+        Accepted = TRUE
+     ELSE:
+          OUTPUT "ID Not acceptable - Please try again"
+     END IF
+END WHILE
+OUTPUT "Acceptable ID no entered.
