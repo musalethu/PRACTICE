@@ -1,0 +1,29 @@
+CHARACTER CHECK
+ A Type check is used to ensure that an entered string does not contain any unacceptable characters. 
+
+An example scenario might be that a user needs to choose a username. The username cannot contain the ! or @ symbol as they are reserved for admin usernames.
+
+Pseudo code for a validation check like this may look like:
+
+OUTPUT "Please choose a username"
+Accepted = False
+Find = False
+While Accepted = False Do:
+​     Username = INPUT()
+     length = len(Username)
+     FOR x = 0 to Length DO:
+          IF Username(x) = "!" OR Username(x) = "@"
+               Find = True
+          END IF
+      END FOR
+      IF Find = True THEN:
+          Accepted = False
+          Find = False
+          OUTPUT "Unacceptable Username, cannot contain ! or @ symbols"
+          Else:
+               Accepted = True
+          END IF
+END WHILE
+OUTPUT "Acceptable username entered"
+
+​

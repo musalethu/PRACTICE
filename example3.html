@@ -1,0 +1,18 @@
+TYPE CHECK
+ A Type check is used to ensure that the correct data type has been entered. This means that  if you are requesting an integer then the program will only accept an integer, a string or any other data type would be rejected.
+
+An example scenario for this would be a program that asks the user to enter their age. This input should be a whole number and therefor an integer. If any other type of data is entered then it should be rejected and the user should be given the chance to try again.
+
+Pseudo code for a validation check like this may look like:
+
+OUTPUT "Please enter your age"
+Accepted = False
+While Accepted = False Do:
+​     Age = INPUT()
+     IF Age.isdigit():
+        Accepted = TRUE
+     ELSE:
+          OUTPUT "Age Not acceptable - Must be a whole number"
+     END IF
+END WHILE
+OUTPUT "Acceptable Age entered.
